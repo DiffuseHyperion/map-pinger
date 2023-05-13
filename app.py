@@ -73,12 +73,11 @@ def ping_server():
 @app.route('/ajax/stats')
 def server_stats():
     server = JavaServer.lookup(server_url)
+    status = server.status()
     server_player_list = []
-    try:
-        server_player_list = server.query().players.names
-    except OSError:
-        pass
-
+    for player in status.players.sample:
+        server_player_list.append(player.name)
+    
     server_player_string = name_list_to_string(server_player_list)
     server_ping = server.ping()
     return jsonify(server_player_string=server_player_string, server_ping=server_ping)
