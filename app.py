@@ -71,12 +71,8 @@ def ping_server():
 
 @app.route('/ajax/stats')
 def server_stats():
-<<<<<<< HEAD
     server = JavaServer.lookup(server_url)
     status = server.status()
-=======
-    server = JavaServer.lookup(server_url, timeout=3)
->>>>>>> a5c4472daa2455499b800e5a64d4f57732933ddc
     server_player_list = []
     for player in status.players.sample:
         server_player_list.append(player.name)
