@@ -1,10 +1,10 @@
-name: Docker Image CI
+name: "Docker Image CI: no-map branch"
 
 on:
   workflow_dispatch:
   push:
     branches:
-    - master
+    - no-map
   schedule:
   - cron: "0 0 * * 0"
 
@@ -25,5 +25,5 @@ jobs:
       - name: build image for github packages
         run: |
           docker buildx build --push \
-            --tag ghcr.io/diffusehyperion/map-pinger:latest \
+            --tag ghcr.io/diffusehyperion/map-pinger:no-map \
             --platform linux/amd64,linux/arm/v7,linux/arm64 .
