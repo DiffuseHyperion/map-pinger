@@ -32,29 +32,6 @@ def index():
 def info():
     return render_template("info.html")
 
-@app.route('/ajax/map')
-def ping_map():
-    map_status = ""
-    map_status_class = ""
-    try:
-        response = requests.get(map_url, timeout=3)
-        response.raise_for_status()
-        map_status = "Online!"
-        map_status_class = "success"
-    except requests.exceptions.HTTPError as err:
-        code = int(str(err)[:3])
-        map_status = ""
-        if code == 502: # Main Server offline
-            map_status = "Offline..."
-        else:
-            map_status = "Catastrophically Offline!!!"
-        map_status_class = "error"
-    except requests.exceptions.SSLError or requests.exceptions.ConnectionError or requests.exceptions.ConnectionTimeout:
-        print("SSLError")
-        map_status = "Catastrophically Offline!!!"
-        map_status_class = "error"
-    return jsonify(map_status=map_status, map_status_class=map_status_class)
-
 @app.route('/ajax/server')
 def ping_server():
     server_status = ""

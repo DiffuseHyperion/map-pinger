@@ -13,18 +13,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script>
       $(function() {
-        $.getJSON('/ajax/map',
-          function(data) {
-            $("#map_status").text(data.map_status);
-            $("#map_status").removeClass("loading");
-            $("#map_status").addClass(data.map_status_class);
-
-            if (data.map_status_class == "success") {
-              $("#map_preview_img").attr("src", "/static/map-preview.png");
-              $("#map_preview").attr("href", "https://map.diffusehyperion.me");
-            }
-          }
-        );
         $.getJSON('/ajax/server',
           function(data) {
             $("#server_status").text(data.server_status);
@@ -56,17 +44,6 @@
         <h4 id="server_ping">Ping: {{server_ping}}ms</h4>
       </div>
       <div id="links">
-        <div class="preview-container">
-          <a id="map_preview">
-            <img
-              id="map_preview_img"
-              class="preview"
-              src="/static/map-grayscale-preview.png"
-              alt="Minecraft Server Map"
-            />
-          </a>
-          <a href="https://map.diffusehyperion.me">Minecraft Server Map</a>
-        </div>
         <div class="preview-container">
           <a href="info.html">
             <img
